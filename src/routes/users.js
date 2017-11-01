@@ -18,15 +18,4 @@ router.post('/', (req, res) => {
     .catch(err => res.status(400).json({ errors: parseErrors(err.errors) }));
 });
 
-router.post('/confirmation', (req, res) => {
-  const { token } = req.body;
-  User.findOneAndUpdate(
-    { confirmationToken: token },
-    { confirmationToken: '', confirmed: true },
-    { new: true },
-  ).then((user) => {
-    user ? res.json({ user: user.toAuthJSON() }) : res.status(400).json({})
-  });
-});
-
 export default router;

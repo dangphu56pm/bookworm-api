@@ -8,7 +8,7 @@
     "linebreak-style": [
       "off",
       "unix"
-    ],
+    ],    
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }]
   }
 }
