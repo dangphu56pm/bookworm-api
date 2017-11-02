@@ -37,6 +37,10 @@ schema.methods.generateConfirmationUrl = function generateConfirmationUrl() {
   return `${process.env.HOST}/confirmation/${this.confirmationToken}`;
 };
 
+schema.methods.generateResetPasswordLink = function generateResetPasswordLink() {
+  return `${process.env.HOST}/reset_password/${this.generateResetPasswordToken()}`;
+};
+
 schema.methods.generateJWT = function generateJWT() {
   return jwt.sign(
     {
@@ -44,6 +48,16 @@ schema.methods.generateJWT = function generateJWT() {
       confirmed: this.confirmed,
     },
     process.env.JWT_SECRET,
+  );
+};
+
+schema.methods.generateResetPasswordToken = function generateResetPasswordToken() {
+  return jwt.sign(
+    {
+      _id: this._id,
+    },
+    process.env.JWT_SECRET,
+    { expiresIn: '1h' },
   );
 };
 
